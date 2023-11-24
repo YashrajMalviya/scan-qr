@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_scanner/qr_scanner.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +13,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Scan QR',
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Scaffold(),
+      home: const QRScan(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
