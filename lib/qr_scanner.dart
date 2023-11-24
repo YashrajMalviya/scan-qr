@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:qr_scanner/result_screen.dart';
+import 'package:qr_scanner/qr_overlay.dart';
 
 const bgColor = Color(0xfffafafa);
 
-class QRScan extends StatelessWidget {
+class QRScan extends StatefulWidget {
   const QRScan({super.key});
+
+  @override
+  State<QRScan> createState() => _QRScanState();
+}
+
+class _QRScanState extends State<QRScan> {
+  bool isScanCompleted = false;
+  void closeScreen() {
+    isScanCompleted = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,10 +67,27 @@ class QRScan extends StatelessWidget {
             ),
             Expanded(
               flex: 4,
-              child: MobileScanner(
-                onDetect: (barcode) {
-
-                },
+              child: Stack(
+                children: [
+                  MobileScanner(
+                    onDetect: (barcode) {
+                      if (!isScanCompleted) {
+                        String code = barcode.raw ?? '---';
+                        isScanCompleted = true;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ResultScreen(
+                              code: code,
+                              closeScreen: closeScreen,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  const QRScannerOverlay(overlayColour: bgColor)
+                ],
               ),
             ),
             Expanded(
