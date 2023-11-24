@@ -14,6 +14,9 @@ class QRScan extends StatefulWidget {
 
 class _QRScanState extends State<QRScan> {
   bool isScanCompleted = false;
+  bool isFlashOn = false;
+  MobileScannerController controller = MobileScannerController();
+
   void closeScreen() {
     isScanCompleted = true;
   }
@@ -22,8 +25,22 @@ class _QRScanState extends State<QRScan> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
+      drawer: const Drawer(),
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  isFlashOn = !isFlashOn;
+                });
+                controller.toggleTorch();
+              },
+              icon: Icon(
+                Icons.flash_on,
+                color: isFlashOn ? Colors.blue : Colors.grey,
+              ))
+        ],
+        backgroundColor: bgColor,
         centerTitle: true,
         title: const Text(
           "QR Scanner",
@@ -41,6 +58,7 @@ class _QRScanState extends State<QRScan> {
           children: [
             const Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     'Scan Your QR',
@@ -70,6 +88,7 @@ class _QRScanState extends State<QRScan> {
               child: Stack(
                 children: [
                   MobileScanner(
+                    controller: controller,
                     onDetect: (barcode) {
                       if (!isScanCompleted) {
                         String code = barcode.raw ?? '---';

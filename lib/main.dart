@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         useMaterial3: true,
       ),
       home: const QRScan(),
