@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
         useMaterial3: true,
       ),
-      home: const QRScan(),
       debugShowCheckedModeBanner: false,
+      home: const QRScan()
     );
   }
 }

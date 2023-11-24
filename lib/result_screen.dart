@@ -75,7 +75,7 @@ class ResultScreen extends StatelessWidget {
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: code));
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.purple),
                 child: const Text(
                   "Copy",
                   style: TextStyle(
